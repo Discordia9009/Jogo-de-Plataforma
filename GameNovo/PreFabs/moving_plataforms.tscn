@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://oul66vyvw8aj"]
+
+[ext_resource type="Script" path="res://Nodes/MovingPlataformsScript.gd" id="1_tny06"]
+[ext_resource type="Texture2D" uid="uid://dva6u5ce1u1i4" path="res://Sprites/MapPlatform/Platforma.png" id="2_j673h"]
+[ext_resource type="Animation" uid="uid://u2q1kap1g57b" path="res://AnimationPlatForm/ColorAnimation.res" id="3_ojc3m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ehq6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j673h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qx5y1"]
+size = Vector2(174, 68)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_64fsy"]
+_data = {
+"ColorAnimation": ExtResource("3_ojc3m")
+}
+
+[node name="MovingPlataforms" type="Node2D"]
+script = ExtResource("1_tny06")
+
+[node name="PlatForm2" type="AnimatableBody2D" parent="." groups=["PlatForms"]]
+collision_layer = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlatForm2"]
+scale = Vector2(0.58, 0.226667)
+sprite_frames = SubResource("SpriteFrames_8ehq6")
+frame_progress = 0.284974
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatForm2"]
+shape = SubResource("RectangleShape2D_qx5y1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlatForm2"]
+libraries = {
+"": SubResource("AnimationLibrary_64fsy")
+}

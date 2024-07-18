@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://bch18qmqt7fqw"]
+
+[ext_resource type="Script" path="res://PreFabs/NextLevel.gd" id="1_8pc8h"]
+[ext_resource type="Texture2D" uid="uid://dva6u5ce1u1i4" path="res://Sprites/MapPlatform/Platforma.png" id="1_11ajf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sixot"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_11ajf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cvk4m"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+spread = 10.0
+initial_velocity_max = 90.0
+gravity = Vector3(-94, 0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2uxv"]
+size = Vector2(94, 185)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("1_8pc8h")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+position = Vector2(404.5, 168)
+scale = Vector2(0.31, 0.613333)
+sprite_frames = SubResource("SpriteFrames_sixot")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Area2D/AnimatedSprite2D"]
+position = Vector2(-140.323, 1.63044)
+scale = Vector2(1, 1.52174)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_cvk4m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(404, 167.5)
+shape = SubResource("RectangleShape2D_q2uxv")

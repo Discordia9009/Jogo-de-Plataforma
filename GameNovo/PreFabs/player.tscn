@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://trqvuphu8ywv"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/PlayerScript.gd" id="1_4o2b0"]
+[ext_resource type="Texture2D" uid="uid://c6ml2ej4by0g8" path="res://Sprites/PlayerSprite/GamePlayer.png" id="2_ju46b"]
+[ext_resource type="PackedScene" uid="uid://cndt1yp23a07m" path="res://PreFabs/Ghosting.tscn" id="2_ribet"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_svx1x"]
+size = Vector2(76, 81)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h22wt"]
+size = Vector2(71.3568, 7.45015)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(169, -119)
+scale = Vector2(0.364366, 0.353525)
+collision_mask = 2
+script = ExtResource("1_4o2b0")
+Ghost_Node = ExtResource("2_ribet")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 3.09944e-06)
+scale = Vector2(0.253333, 0.27)
+texture = ExtResource("2_ju46b")
+
+[node name="DashTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_svx1x")
+
+[node name="Area2D2" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(0, 39.6011)
+shape = SubResource("RectangleShape2D_h22wt")
+
+[node name="GhostTimer" type="Timer" parent="."]
+wait_time = 0.023
+autostart = true
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
+[connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]

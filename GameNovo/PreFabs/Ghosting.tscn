@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cndt1yp23a07m"]
+
+[ext_resource type="Texture2D" uid="uid://c6ml2ej4by0g8" path="res://Sprites/PlayerSprite/GamePlayer.png" id="1_da2lx"]
+[ext_resource type="Script" path="res://GhostingScript.gd" id="2_vfx06"]
+
+[node name="Ghost" type="Sprite2D"]
+scale = Vector2(0.253, 0.27)
+texture = ExtResource("1_da2lx")
+script = ExtResource("2_vfx06")
